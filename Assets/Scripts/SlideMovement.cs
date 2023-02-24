@@ -7,6 +7,7 @@ public class SlideMovement : MonoBehaviour
 {
     public Transform _referencePoint;
     public Transform _velocityHand;
+    public Transform _camera;
     public float _velocity = 0f;
 
 
@@ -14,8 +15,8 @@ public class SlideMovement : MonoBehaviour
     private float _increment;
 
     private Transform _tfPlayer;
-    private float distMin = 100;
-    private float distMax = 0;
+    private float distMax = 0.45f;
+    private float distMin = 0.24f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,16 +27,16 @@ public class SlideMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float dist = Mathf.Pow(_referencePoint.position.x - _velocityHand.position.x, 2) + Mathf.Pow(_referencePoint.position.y - _velocityHand.position.y, 2);     //Distance 2D
-        dist = Mathf.Sqrt(dist);
-
+        Vector3 direction = _velocityHand.position - _referencePoint.position;
+        direction.y = 0;
+        float dist = direction.magnitude;
         //float dist = (_referencePoint.position - _velocityHand.position).magnitude;                                                                               //Distance 3D
 
         dist = Mathf.Clamp(dist, distMin, distMax);
+        Debug.Log(dist);
+        _increment = _speed * Time.deltaTime * (dist - distMin);
 
-        _increment = _speed * Time.deltaTime * dist;
-
-        _tfPlayer.Translate(Input.GetAxis("Horizontal") * _increment, 0, Input.GetAxis("Vertical") * _increment);
+        _tfPlayer.Translate(direction.normalized * _increment);
     }
 
     private void UpDown()
