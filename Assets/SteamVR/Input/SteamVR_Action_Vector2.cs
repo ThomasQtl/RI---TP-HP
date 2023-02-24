@@ -186,6 +186,11 @@ namespace Valve.VR
         {
             InitAfterDeserialize();
         }
+
+        public void AddOnUpdateListener(Action<Vector2> upDown)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>

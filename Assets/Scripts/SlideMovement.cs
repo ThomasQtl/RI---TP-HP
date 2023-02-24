@@ -9,6 +9,7 @@ public class SlideMovement : MonoBehaviour
     public Transform _velocityHand;
     public Transform _camera;
     public float _velocity = 0f;
+    public SteamVR_Action_Vector2 input;
 
 
     public float _speed = 10.0f;
@@ -29,18 +30,18 @@ public class SlideMovement : MonoBehaviour
     {
         Vector3 direction = _velocityHand.position - _referencePoint.position;
         direction.y = 0;
+
         float dist = direction.magnitude;
+        Debug.Log(dist);
+        if (input.setActive)
+        {
+            direction.y += input.axis.y * Time.deltaTime * 100;
+        }
         //float dist = (_referencePoint.position - _velocityHand.position).magnitude;                                                                               //Distance 3D
 
         dist = Mathf.Clamp(dist, distMin, distMax);
-        Debug.Log(dist);
         _increment = _speed * Time.deltaTime * (dist - distMin);
 
         _tfPlayer.Translate(direction.normalized * _increment);
-    }
-
-    private void UpDown()
-    {
-
     }
 }

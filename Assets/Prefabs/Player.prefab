@@ -415,7 +415,10 @@ MonoBehaviour:
   _velocityHand: {fileID: 7365679248291881238}
   _camera: {fileID: 7365679248291824734}
   _velocity: 0
-  _speed: 10
+  input:
+    actionPath: /actions/default/in/RightTouchPad
+    needsReinit: 0
+  _speed: 200
 --- !u!1 &7365679248291510160
 GameObject:
   m_ObjectHideFlags: 0
