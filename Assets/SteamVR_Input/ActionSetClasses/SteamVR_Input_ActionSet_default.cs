@@ -105,11 +105,11 @@ namespace Valve.VR
             }
         }
         
-        public virtual SteamVR_Action_Vector2 PlayerUpDown
+        public virtual SteamVR_Action_Vector2 RightHandPad
         {
             get
             {
-                return SteamVR_Actions.default_PlayerUpDown;
+                return SteamVR_Actions.default_RightHandPad;
             }
         }
         
