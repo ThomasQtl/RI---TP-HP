@@ -63,7 +63,7 @@ public class PerlinNoise : NoiseGenerator
         return dx * gradient.x + dy * gradient.y;
     }
 
-    public float Next(float x, float y)
+    public float Generate(float x, float y)
     {
         int i0 = (int)(x / lw);
         int i1 = i0 + 1;

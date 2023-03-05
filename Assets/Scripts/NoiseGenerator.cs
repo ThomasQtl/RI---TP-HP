@@ -1,4 +1,4 @@
 public interface NoiseGenerator
 {
-    float Next(float x, float y);
+    float Generate(float x, float y);
 }
