@@ -26,14 +26,14 @@ public class PerlinNoise : NoiseGenerator
             {
                 float x = i * lw;
 
-                float dx = (float)generator.Next(x, y);
-                float dy = (float)generator.Next(x, y);
+                float dx = (float)generator.Generate(x, y);
+                float dy = (float)generator.Generate(x, y);
 
-                float norm = MathF.Sqrt(x * x + y * y);
+                float norm = MathF.Sqrt(dx * dx + dy * dy);
 
                 column[i] = new Vector2(
-                    x / norm,
-                    y / norm
+                    dx / norm,
+                    dy / norm
                 );
             }
 
