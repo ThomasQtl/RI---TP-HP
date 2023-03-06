@@ -35,12 +35,10 @@ public class Land : MonoBehaviour
 
     void SpawnGenerator()
     {
-        if (generator == null)
-        {
-            XXNoiseGenerator noise = new XXNoiseGenerator(seed);
+        XXNoiseGenerator noise = new XXNoiseGenerator(seed);
 
-            generator = noise;
-        }
+
+        generator = noise;
     }
 
     void Awake()
@@ -58,6 +56,8 @@ public class Land : MonoBehaviour
 
         mesh.triangles = GenerateTriangles();
 
+        mesh.RecalculateNormals();
+
         GetComponent<MeshFilter>().sharedMesh = mesh;
     }
 
@@ -66,17 +66,20 @@ public class Land : MonoBehaviour
         Vector3[] points = new Vector3[rows * cols];
         Vector2[] uvs = new Vector2[rows * cols];
 
-        float dx = width / rows;
-        float dy = height / cols;
+        float x0 = - width / 2f;
+        float y0 = - height / 2f;
+
+        float dx = width / (rows-1);
+        float dy = height / (cols-1);
         uint i = 0;
 
         for (uint row = 0; row < rows; row++)
         {
-            float x = dx * row;
+            float x = x0 + dx * row;
 
             for (uint col = 0; col < cols; col++)
             {
-                float y = dy * col;
+                float y = y0 + dy * col;
 
                 points[i] = new Vector3(x, maxHeight * generator.Generate(x, y), y);
                 uvs[i] = new Vector2(x, y);
