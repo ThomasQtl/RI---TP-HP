@@ -15,7 +15,7 @@ public class XXNoiseGenerator : NoiseGenerator {
 
         byte[] hash = this.hash.ComputeHash(data);
 
-        uint hash_number = (uint)BitConverter.ToInt32(hash, 0);
+        uint hash_number = (uint)BitConverter.ToUInt32(hash, 0);
 
         return hash_number / (float)uint.MaxValue;
     }
