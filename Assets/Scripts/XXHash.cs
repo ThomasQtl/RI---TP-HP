@@ -117,7 +117,7 @@ public sealed class XXHash32 : HashAlgorithm
     /// <param name="algName">The hash algorithm implementation to use.</param>
     /// <returns>This method always throws <see cref="NotSupportedException"/>. </returns>
     /// <exception cref="NotSupportedException">This method is not be supported.</exception>
-    public new static XXHash32 Create(string algName) => throw new NotSupportedException("This method is not be supported.");
+    public new static XXHash32 Create(string _algName) => throw new NotSupportedException("This method is not be supported.");
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XXHash32"/> class by default seed(0).
