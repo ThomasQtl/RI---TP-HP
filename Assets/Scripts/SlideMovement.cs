@@ -52,7 +52,6 @@ public class SlideMovement : MonoBehaviour
                 _increment *= _forceMultiplieur;
             }
             _rbPlayer.AddForce(direction.normalized * _increment, ForceMode.Acceleration);
-            Debug.Log(_rbPlayer.velocity.magnitude);
             if(_rbPlayer.velocity.magnitude > _maxSpeed)
             {
                 _rbPlayer.velocity = _rbPlayer.velocity.normalized * _maxSpeed;
