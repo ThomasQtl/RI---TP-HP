@@ -10,36 +10,53 @@ public class SlideMovement : MonoBehaviour
     public SteamVR_Action_Vector2 input;
 
 
-    public float _speed = 10.0f;
+    public float _speed;
+    public float _forceMultiplieur;
+    public float _maxSpeed;
     private float _increment;
 
-    private Transform _tfPlayer;
-    private float distMax = 0.45f;
-    private float distMin = 0.24f;
+    private Rigidbody _rbPlayer;
+    private float distMax = 0.75f;
+    private float distMin = 0.40f;
 
     // Start is called before the first frame update
     void Start()
     {
-        _tfPlayer = GetComponent<Transform>();
+        _rbPlayer = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
         Vector3 direction = _velocityHand.position - _referencePoint.position;
         direction.y = 0;
-
         float dist = direction.magnitude;
-        
         if (input.setActive)
         {
             direction.y += input.axis.y * Time.deltaTime * 100;
         }
+        else
+        {
+            direction.y -= _rbPlayer.velocity.y;
+        }
         
-        //float dist = (_referencePoint.position - _velocityHand.position).magnitude;                                                                               //Distance 3D
-
         dist = Mathf.Clamp(dist, distMin, distMax);
-        _increment = _speed * Time.fixedDeltaTime * (dist - distMin);
-
-        _tfPlayer.Translate(direction.normalized * _increment);
+        _increment = _speed * Time.fixedDeltaTime * (dist - distMin) * _forceMultiplieur;
+        if(_increment == 0)
+        {
+            _rbPlayer.AddForce(-1 * _rbPlayer.velocity, ForceMode.Acceleration);
+        }
+        else
+        {
+            if (Mathf.Abs(Vector3.Angle(direction, _rbPlayer.velocity)) > 45)
+            {
+                _increment *= _forceMultiplieur;
+            }
+            _rbPlayer.AddForce(direction.normalized * _increment, ForceMode.Acceleration);
+            Debug.Log(_rbPlayer.velocity.magnitude);
+            if(_rbPlayer.velocity.magnitude > _maxSpeed)
+            {
+                _rbPlayer.velocity = _rbPlayer.velocity.normalized * _maxSpeed;
+            }
+        }
     }
 }
