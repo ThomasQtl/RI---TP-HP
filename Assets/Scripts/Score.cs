@@ -22,7 +22,7 @@ public class Score : MonoBehaviour
         {
             score = GameObject.Find("RedScore").GetComponent<TextMeshProUGUI>();
             team = "Red";
-            team_length = 4;
+            team_length = 3;
             score.text = "Red : 0";
         }
     }
@@ -30,7 +30,11 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+    }
+
+    public void RAZ()
+    {
+        score.text = team + " : 0";
     }
 
     private void OnTriggerEnter(Collider other)
