@@ -8,10 +8,12 @@ public class Land : MonoBehaviour
 {
     public Texture2D[] availableTrees = new Texture2D[0];
 
-    [Min(0)]
-    public float minRadiusX = 0;
-    [Min(0)]
-    public float minRadiusY = 0;
+    public Texture2D heightMap;
+
+    // [Min(0)]
+    // public float minRadiusX = 0;
+    // [Min(0)]
+    // public float minRadiusY = 0;
 
     public float adaptationLength = 0;
     public float maxHeight = 100;
@@ -27,25 +29,26 @@ public class Land : MonoBehaviour
     [Min(2)]
     public int cols = 100;
 
-    public uint seed = 0;
+    // public uint seed = 0;
 
-    private NoiseGenerator generator;
+    // private NoiseGenerator generator;
 
     private Mesh mesh;
 
-    void SpawnGenerator()
-    {
-        XXNoiseGenerator noise = new XXNoiseGenerator(seed);
+    // void SpawnGenerator()
+    // {
+    //     XXNoiseGenerator noise = new XXNoiseGenerator(seed);
 
+    //     generator = new PerlinNoise(noise, width, height, 2, 2);
 
-        generator = noise;
-    }
+    //     generator = noise;
+    // }
 
     void Awake()
     {
-        SpawnGenerator();
+        // SpawnGenerator();
 
-        GenerateMesh();
+        // GenerateMesh();
     }
 
     void GenerateMesh()
@@ -81,7 +84,13 @@ public class Land : MonoBehaviour
             {
                 float y = y0 + dy * col;
 
-                points[i] = new Vector3(x, maxHeight * generator.Generate(x, y), y);
+                float imgcol = (float)col/(float)(cols-1) * (float)(heightMap.width-1);
+                float imgrow = (float)row/(float)(rows-1) * (float)(heightMap.height-1);
+
+                Color heightColor = maxHeight * heightMap.GetPixel((int)imgcol, (int)imgrow);
+
+                // points[i] = new Vector3(x, maxHeight * generator.Generate(x, y), y);
+                points[i] = new Vector3(x, heightColor.r, y);
                 uvs[i] = new Vector2(x, y);
 
                 i++;
@@ -119,7 +128,7 @@ public class Land : MonoBehaviour
 
     void Update()
     {
-        SpawnGenerator();
+        // SpawnGenerator();
 
         GenerateMesh();
     }

@@ -7,11 +7,12 @@ public class XXNoiseGenerator : NoiseGenerator {
         hash = new XXHash64(seed);
     }
 
-    public float Generate(float x, float y) {
-        byte[] data = new byte[sizeof(float) * 2];
+    public float Generate(float x, float y, int i) {
+        byte[] data = new byte[sizeof(float) * 2 + sizeof(int)];
 
         Buffer.BlockCopy(BitConverter.GetBytes(x), 0, data, 0, sizeof(float));
         Buffer.BlockCopy(BitConverter.GetBytes(y), 0, data, sizeof(float), sizeof(float));
+        Buffer.BlockCopy(BitConverter.GetBytes(i), 0, data, 2*sizeof(float), sizeof(int));
 
         byte[] hash = this.hash.ComputeHash(data);
 
