@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3750082322553289458}
   - component: {fileID: 6628982205236790805}
   - component: {fileID: 8635866634030641547}
-  - component: {fileID: 5489710222208339320}
+  - component: {fileID: 8929011617484046715}
   m_Layer: 0
   m_Name: Land
   m_TagString: Untagged
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8135a8cb539ac32da942c74b69bb3724, type: 2}
+  - {fileID: 2100000, guid: 309190e6a492d3742b90a45264f09c47, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5489710222208339320
+--- !u!114 &8929011617484046715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,14 +93,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5313748063706712520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7273c416ee5381915b28d6311a0af26c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8027bad885c9f2e498d5ed8c337bdd70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   availableTrees: []
-  heightMap: {fileID: 2800000, guid: f5518587320c1626ba51aa0423856f54, type: 3}
+  heightMap: {fileID: 2800000, guid: af8ec6cc06a23c94c9cdd9a20b863af0, type: 3}
   adaptationLength: 0
-  maxHeight: 500
+  maxHeight: 300
   width: 1000
   height: 1000
-  rows: 200
-  cols: 200
+  rows: 100
+  cols: 100

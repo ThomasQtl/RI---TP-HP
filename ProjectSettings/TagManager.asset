@@ -6,6 +6,9 @@ TagManager:
   tags:
   - _blueTeam
   - _redTeam
+  - projectile
+  - FxTemporaire
+  - Zone
   layers:
   - Default
   - TransparentFX

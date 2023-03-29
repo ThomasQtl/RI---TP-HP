@@ -8,6 +8,7 @@ public class SlideMovement : MonoBehaviour
     public Transform _referencePoint;
     public Transform _velocityHand;
     public SteamVR_Action_Vector2 input;
+    public Transform spawnPoint;
 
 
     public float _speed;
@@ -23,6 +24,7 @@ public class SlideMovement : MonoBehaviour
     void Start()
     {
         _rbPlayer = GetComponent<Rigidbody>();
+        transform.position = spawnPoint.position;
     }
 
     private void FixedUpdate()
@@ -56,6 +58,15 @@ public class SlideMovement : MonoBehaviour
             {
                 _rbPlayer.velocity = _rbPlayer.velocity.normalized * _maxSpeed;
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Zone")
+        {
+            transform.position = spawnPoint.position;
+            _rbPlayer.velocity = Vector3.zero;
         }
     }
 }
