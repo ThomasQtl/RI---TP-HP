@@ -8,6 +8,9 @@ public class SlideMovement : MonoBehaviour
     public Transform _referencePoint;
     public Transform _velocityHand;
     public SteamVR_Action_Vector2 input;
+    public SteamVR_Action_Boolean inputShield;
+    public GameObject shield;
+    public Transform spawnPoint;
 
 
     public float _speed;
@@ -23,6 +26,7 @@ public class SlideMovement : MonoBehaviour
     void Start()
     {
         _rbPlayer = GetComponent<Rigidbody>();
+        transform.position = spawnPoint.position;
     }
 
     private void FixedUpdate()
@@ -30,13 +34,22 @@ public class SlideMovement : MonoBehaviour
         Vector3 direction = _velocityHand.position - _referencePoint.position;
         direction.y = 0;
         float dist = direction.magnitude;
-        if (input.setActive)
+        if (input.active)
         {
             direction.y += input.axis.y * Time.deltaTime * 100;
         }
         else
         {
             direction.y -= _rbPlayer.velocity.y;
+        }
+        Debug.Log(inputShield.state);
+        if( inputShield.active)
+        {
+            shield.SetActive(true);
+        }
+        else
+        {
+            shield.SetActive(false);
         }
         
         dist = Mathf.Clamp(dist, distMin, distMax);
@@ -56,6 +69,15 @@ public class SlideMovement : MonoBehaviour
             {
                 _rbPlayer.velocity = _rbPlayer.velocity.normalized * _maxSpeed;
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Zone")
+        {
+            transform.position = spawnPoint.position;
+            _rbPlayer.velocity = Vector3.zero;
         }
     }
 }
