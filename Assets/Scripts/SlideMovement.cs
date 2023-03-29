@@ -42,7 +42,6 @@ public class SlideMovement : MonoBehaviour
         {
             direction.y -= _rbPlayer.velocity.y;
         }
-        Debug.Log(inputShield.state);
         if( inputShield.active)
         {
             shield.SetActive(true);
@@ -56,7 +55,7 @@ public class SlideMovement : MonoBehaviour
         _increment = _speed * Time.fixedDeltaTime * (dist - distMin) * _forceMultiplieur;
         if(_increment == 0)
         {
-            _rbPlayer.AddForce(-1 * _rbPlayer.velocity, ForceMode.Acceleration);
+            _rbPlayer.AddForce(-5 * _rbPlayer.velocity, ForceMode.Acceleration);
         }
         else
         {

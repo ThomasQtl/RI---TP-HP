@@ -92,7 +92,7 @@ public class Bludger : MonoBehaviour
     {
         if (other.name == "AreaOfMovement")
         {
-            Debug.Log("Putting Back in Area cause of trigger");
+            //Debug.Log("Putting Back in Area cause of trigger");
             _direction = Vector3.Normalize(_area_Collider.gameObject.transform.position - transform.position);
             PutBackInBounds(_area_Collider);
         }
@@ -140,7 +140,6 @@ public class Bludger : MonoBehaviour
             transform.position += (speed * Vector3.Normalize(_area_Collider.gameObject.transform.position - transform.position) * Time.deltaTime);
             //Debug.Break();
         }
-        Debug.Log("Did My thing : " + _count + " times");
     }
 
 
