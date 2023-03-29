@@ -8,6 +8,8 @@ public class SlideMovement : MonoBehaviour
     public Transform _referencePoint;
     public Transform _velocityHand;
     public SteamVR_Action_Vector2 input;
+    public SteamVR_Action_Boolean inputShield;
+    public GameObject shield;
     public Transform spawnPoint;
 
 
@@ -32,13 +34,22 @@ public class SlideMovement : MonoBehaviour
         Vector3 direction = _velocityHand.position - _referencePoint.position;
         direction.y = 0;
         float dist = direction.magnitude;
-        if (input.setActive)
+        if (input.active)
         {
             direction.y += input.axis.y * Time.deltaTime * 100;
         }
         else
         {
             direction.y -= _rbPlayer.velocity.y;
+        }
+        Debug.Log(inputShield.state);
+        if( inputShield.active)
+        {
+            shield.SetActive(true);
+        }
+        else
+        {
+            shield.SetActive(false);
         }
         
         dist = Mathf.Clamp(dist, distMin, distMax);
